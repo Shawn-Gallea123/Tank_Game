@@ -16,6 +16,13 @@ class TANK_GAME_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 private:
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.3333;
+
 	ATank *GetControlledTank() const;
 	
 	virtual void BeginPlay() override;

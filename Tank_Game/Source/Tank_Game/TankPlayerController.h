@@ -4,6 +4,7 @@
 
 #include "Tank.h"
 #include "CoreMinimal.h"
+#include "Runtime/Engine/Classes/Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h" // must be last include
 
@@ -23,6 +24,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLocation = 0.3333;
 
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000.0;
+
 	ATank *GetControlledTank() const;
 	
 	virtual void BeginPlay() override;
@@ -36,5 +40,10 @@ private:
 	// Return an out parameter, true if hit landscape
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 
+	// Gets the direction that the reticle is looking
 	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector & HitLocation) const;
+
+
 };

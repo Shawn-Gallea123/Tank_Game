@@ -13,7 +13,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent *BarrelToSet) {
+void UTankAimingComponent::SetBarrelReference(UTankBarrel *BarrelToSet) {
 	Barrel = BarrelToSet;
 }
 
@@ -42,6 +42,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-	// Move the Barrel the right amount this frame
-	// Given max elevation speed and frame time
+	
+	Barrel->Elevate(5);
+
 }

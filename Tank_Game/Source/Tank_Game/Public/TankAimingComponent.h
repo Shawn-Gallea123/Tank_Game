@@ -27,6 +27,8 @@ public:
 
 protected:
 
+
+
 public:	
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);

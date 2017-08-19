@@ -40,6 +40,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret * TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void FireCannon();
 	
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)

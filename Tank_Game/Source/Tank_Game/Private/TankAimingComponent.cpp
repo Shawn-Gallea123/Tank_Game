@@ -46,15 +46,15 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 	if (bHaveAimSolution) {
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		FVector fv = FVector(100., 0., 0.);
-		auto Name = GetOwner()->GetName();
 		MoveBarrel(AimDirection);
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution found for %s"), Time, *Name);
+		//auto Name = GetOwner()->GetName();
+		//auto Time = GetWorld()->GetTimeSeconds();
+		//UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution found for %s"), Time, *Name);
 	}
 	else {
-		auto Time = GetWorld()->GetTimeSeconds();
-		auto Name = GetOwner()->GetName();
-		UE_LOG(LogTemp, Warning, TEXT("%f: Cannot find a solution for %s"), Time, *Name);
+		//auto Time = GetWorld()->GetTimeSeconds();
+		//auto Name = GetOwner()->GetName();
+		//UE_LOG(LogTemp, Warning, TEXT("%f: Cannot find a solution for %s"), Time, *Name);
 	}
 }
 

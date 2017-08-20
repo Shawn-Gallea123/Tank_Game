@@ -48,14 +48,15 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet) {
 }
 
 void ATank::FireCannon() {
-	UE_LOG(LogTemp, Warning, TEXT("Tank FireCannon called"));
 
 	if (!Barrel) { return; }
 
 	// Spawn a projectile at the firing socket location on the Barrel
-
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint,
+	// Captured the projectile using the return value to call Launch on it
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint,
 		Barrel->GetSocketLocation(FName("Projectile")),
 		Barrel->GetSocketRotation(FName("Projectile")));
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 
 }

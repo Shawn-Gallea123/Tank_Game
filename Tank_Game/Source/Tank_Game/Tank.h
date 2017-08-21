@@ -46,16 +46,20 @@ public:
 	void FireCannon();
 	
 private:
-	UPROPERTY(EditAnywhere, Category = Firing)
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000.0;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
-	TSubclassOf<AProjectile> ProjectileBlueprint;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3.0;
 
 	// Local Barrel reference for spawning the projectile
 	UTankBarrel *Barrel = nullptr;
 
-	float ReloadTimeInSeconds = 3.0;
+	
 
 	double LastFireTime = 0.0;
 	

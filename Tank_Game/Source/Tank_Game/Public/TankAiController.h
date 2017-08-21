@@ -20,8 +20,6 @@ class TANK_GAME_API ATankAiController : public AAIController
 	
 private:
 	void BeginPlay() override;
-	ATank *GetControlledTank() const;
-	ATank *GetPlayerTank() const;
 	virtual void Tick(float DeltaTime) override;
 	
 };

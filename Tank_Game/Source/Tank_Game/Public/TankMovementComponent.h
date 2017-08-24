@@ -20,7 +20,7 @@ public:
 	// Throw is the -1 - +1 value given by the left thumbstick
 	// indicating how fast the Tank is intended to go
 	UFUNCTION(BlueprintCallable, Category = Input)
-	void IntendMoveForeward(float Throw);
+	void IntendMoveForward(float Throw);
 
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void IntendTurnRight(float Throw);

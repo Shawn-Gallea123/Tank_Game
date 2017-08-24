@@ -8,7 +8,7 @@ void UTankMovementComponent::Initialize(UTankTrack *LeftTrackToSet, UTankTrack *
 	RightTrack = RightTrackToSet;
 }
 
-void UTankMovementComponent::IntendMoveForeward(float Throw) {
+void UTankMovementComponent::IntendMoveForward(float Throw) {
 	// UE_LOG(LogTemp, Warning, TEXT("Intend move foreward Throw: %f"), Throw);
 
 	if (!LeftTrack || !RightTrack) {
@@ -32,7 +32,18 @@ void UTankMovementComponent::IntendTurnRight(float Throw) {
 
 void UTankMovementComponent::RequestDirectMove(const FVector &MoveVelocity, bool bForceMaxSpeed) {
 	// Don't want to call Super, are overriding
-	UE_LOG(LogTemp, Warning, TEXT("%s RequestDirectMove, MoveVelocity: %s"), *GetOwner()->GetName(), *MoveVelocity.ToString());
+
+	// where the Tank is currently facing
+	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+
+	// where the AI pathfinder wants the Tank to be moving and facing
+	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+
+	auto ForwardThrow = FVector::DotProduct(AIForwardIntention, TankForward);
+
+	IntendMoveForward(ForwardThrow);
+
+	// UE_LOG(LogTemp, Warning, TEXT("%s RequestDirectMove, MoveVelocity: %s"), *TankName, *AIForwardIntention);
 }
 
 

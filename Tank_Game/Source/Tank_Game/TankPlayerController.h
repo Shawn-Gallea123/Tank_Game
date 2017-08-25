@@ -17,6 +17,10 @@ UCLASS()
 class TANK_GAME_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank *GetControlledTank() const;
 	
 private:
 
@@ -28,8 +32,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000.0;
-
-	ATank *GetControlledTank() const;
 	
 	virtual void BeginPlay() override;
 

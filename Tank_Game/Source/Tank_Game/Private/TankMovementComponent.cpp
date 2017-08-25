@@ -15,7 +15,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw) {
 		return;
 	}
 
-	// TODO Prevent double speed from stick + shoulders
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 }

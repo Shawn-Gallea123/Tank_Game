@@ -19,19 +19,19 @@ class TANK_GAME_API UTankMovementComponent : public UNavMovementComponent
 public:
 	// Throw is the -1 - +1 value given by the left thumbstick
 	// indicating how fast the Tank is intended to go
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void IntendMoveForward(float Throw);
 
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void IntendTurnRight(float Throw);
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankTrack *LeftTrackToSet, UTankTrack *RightTrackToSet);
 
-	// TODO: Check best privacy
+private:
+	// Called from the pathfinding logic by the AI Controllers
 	virtual void RequestDirectMove(const FVector &MoveVelocity, bool bForceMaxSpeed) override;
 
-private:
 	UTankTrack *LeftTrack = nullptr;
 	UTankTrack *RightTrack = nullptr;
 	

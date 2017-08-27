@@ -11,7 +11,7 @@ void UTankMovementComponent::Initialize(UTankTrack *LeftTrackToSet, UTankTrack *
 void UTankMovementComponent::IntendMoveForward(float Throw) {
 	// UE_LOG(LogTemp, Warning, TEXT("Intend move foreward Throw: %f"), Throw);
 
-	if (!LeftTrack || !RightTrack) {
+	if (!ensure(LeftTrack && RightTrack)) {
 		return;
 	}
 
@@ -21,7 +21,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw) {
 
 void UTankMovementComponent::IntendTurnRight(float Throw) {
 
-	if (!LeftTrack || !RightTrack) {
+	if (!ensure(LeftTrack && RightTrack)) {
 		return;
 	}
 

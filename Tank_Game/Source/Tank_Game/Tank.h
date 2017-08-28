@@ -11,7 +11,6 @@ class UTankBarrel;
 class UTankAimingComponent;
 class UTankTurret;
 class AProjectile;
-class UTankMovementComponent;
 
 UCLASS()
 class TANK_GAME_API ATank : public APawn
@@ -30,10 +29,6 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent *TankAimingComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent *TankMovementComponent = nullptr;
-
-
 public:
 
 	void AimAt(FVector HitLocation);
@@ -46,6 +41,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
+	// TODO remove once firing is moved to AimingComponent
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000.0;
 

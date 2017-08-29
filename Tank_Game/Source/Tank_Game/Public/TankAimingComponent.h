@@ -55,6 +55,8 @@ private:
 
 	void BeginPlay() override;
 
+	bool IsBarrelMoving();
+
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000.0;
 
@@ -65,5 +67,7 @@ private:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	double LastFireTime = 0.0;
+
+	FVector AimingDirection;
 	
 };

@@ -22,8 +22,14 @@ void UTankAimingComponent::BeginPlay() {
 }
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickfunction) {
-	if ((GetWorld()->GetTimeSeconds() - LastFireTime) > ReloadTimeInSeconds) {
+	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds) {
 		FiringStatus = EFiringStatus::Reloading;
+	}
+	else if (IsBarrelMoving()) {
+		FiringStatus = EFiringStatus::Aiming;
+	}
+	else {
+		FiringStatus = EFiringStatus::Locked;
 	}
 	// TODO Handle aiming and locked states
 }
@@ -31,6 +37,16 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 void UTankAimingComponent::Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet) {
 	Barrel = BarrelToSet;
 	Turret = TurretToSet;
+}
+
+bool UTankAimingComponent::IsBarrelMoving() {
+
+	if (!ensure(Barrel)) {
+		return false;
+	}
+
+	FVector BarrelDirection = Barrel->GetForwardVector();
+	return !BarrelDirection.Equals(AimingDirection, 0.01);
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation) {
@@ -51,17 +67,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation) {
 		ESuggestProjVelocityTraceOption::DoNotTrace);
 
 	if (bHaveAimSolution) {
-		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		AimingDirection = OutLaunchVelocity.GetSafeNormal();
 		FVector fv = FVector(100., 0., 0.);
-		MoveBarrel(AimDirection);
-		//auto Name = GetOwner()->GetName();
-		//auto Time = GetWorld()->GetTimeSeconds();
-		//UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution found for %s"), Time, *Name);
+		MoveBarrel(AimingDirection);
 	}
 	else {
-		//auto Time = GetWorld()->GetTimeSeconds();
-		//auto Name = GetOwner()->GetName();
-		//UE_LOG(LogTemp, Warning, TEXT("%f: Cannot find a solution for %s"), Time, *Name);
+		// nothing
 	}
 }
 

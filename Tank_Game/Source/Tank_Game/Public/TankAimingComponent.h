@@ -14,7 +14,8 @@ enum class EFiringStatus : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 class AProjectile;
@@ -41,6 +42,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Ammo Capacity")
+	int Ammo = 5;
 
 public:	
 

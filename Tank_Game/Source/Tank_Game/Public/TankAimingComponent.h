@@ -45,6 +45,8 @@ protected:
 public:	
 
 	void AimAt(FVector HitLocation);
+
+	EFiringStatus GetFiringStatus() const;
 		
 private:
 	UTankBarrel *Barrel = nullptr;

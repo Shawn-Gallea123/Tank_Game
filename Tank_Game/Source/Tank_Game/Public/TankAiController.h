@@ -17,13 +17,13 @@ class TANK_GAME_API ATankAiController : public AAIController
 {
 	GENERATED_BODY()
 	
+protected:
+	// How close can the AI Tank get
+	UPROPERTY(EditDefaultsOnly)
+	float AcceptanceRadius = 8000.f;
 	
 private:
 	void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-
-	// How close can the AI Tank get
-	UPROPERTY(EditDefaultsOnly)
-	float AcceptanceRadius = 3000.f;
 	
 };

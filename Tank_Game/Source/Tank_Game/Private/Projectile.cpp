@@ -2,6 +2,7 @@
 
 #include "Projectile.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
+#include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 
 
 // Sets default values
@@ -14,7 +15,12 @@ AProjectile::AProjectile()
 	ProjectileMovement->bAutoActivate = false;
 
 	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
+	CollisionMesh->SetNotifyRigidBodyCollision(true);
+	CollisionMesh->SetVisibility(false);
+	SetRootComponent(CollisionMesh);
+
 	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
+	LaunchBlast->AttachTo(RootComponent);
 
 }
 

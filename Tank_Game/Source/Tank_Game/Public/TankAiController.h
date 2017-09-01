@@ -7,8 +7,6 @@
 #include "AIController.h"
 #include "TankAiController.generated.h"
 
-class ATank;
-
 /**
  * 
  */
@@ -25,5 +23,9 @@ protected:
 private:
 	void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void SetPawn(APawn *Pawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
 	
 };

@@ -2,6 +2,7 @@
 
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 
 void ATankPlayerController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
@@ -78,5 +79,19 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 
 	HitLocation = FVector(0);
 	return false;
+
+}
+
+void ATankPlayerController::OnTankDeath() {
+	UE_LOG(LogTemp, Warning, TEXT("PLAYER TANK DIED"));
+}
+
+void ATankPlayerController::SetPawn(APawn *Pawn) {
+	Super::SetPawn(Pawn);
+	if (Pawn) {
+		auto PossessedTank = Cast<ATank>(Pawn);
+		if (!ensure(PossessedTank)) { return; }
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
+	}
 
 }

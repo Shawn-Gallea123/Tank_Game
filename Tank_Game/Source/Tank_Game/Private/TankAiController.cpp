@@ -3,6 +3,7 @@
 #include "TankAiController.h"
 #include "Engine.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 
 void ATankAiController::BeginPlay() {
 	Super::BeginPlay();
@@ -29,4 +30,19 @@ void ATankAiController::Tick(float DeltaTime)
 		if (FiringStatus == EFiringStatus::Locked || FiringStatus == EFiringStatus::Aiming) {
 			AimingComponent->FireCannon();
 		}
+}
+
+void ATankAiController::OnTankDeath() {
+	UE_LOG(LogTemp, Warning, TEXT("AI TANK DEAD"));
+}
+
+void ATankAiController::SetPawn(APawn *Pawn) {
+	Super::SetPawn(Pawn);
+	if (Pawn) {
+		auto PossessedTank = Cast<ATank>(Pawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		// Subscribe to that Tank's death event
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAiController::OnTankDeath);
+	}
 }

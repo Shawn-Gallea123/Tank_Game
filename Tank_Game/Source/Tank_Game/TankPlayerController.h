@@ -48,5 +48,10 @@ private:
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector & HitLocation) const;
 
+	virtual void SetPawn(APawn *Pawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
+
 
 };

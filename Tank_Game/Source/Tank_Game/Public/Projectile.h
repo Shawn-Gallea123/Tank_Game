@@ -9,6 +9,7 @@
 
 class UProjectileMovementComponent;
 class UParticleSystemComponent;
+class URadialForceComponent;
 
 UCLASS()
 class TANK_GAME_API AProjectile : public AActor
@@ -38,6 +39,14 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UParticleSystemComponent *ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere)
+	URadialForceComponent *ExplosionForce = nullptr;
+
+	UPROPERTY(EditDefaultsOnly)
+	float DestroyDelay = 5.0;
+
+	void OnTimerExpire();
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent *HitComponent, AActor *OtherActor,
